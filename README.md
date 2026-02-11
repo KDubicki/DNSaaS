@@ -2,6 +2,43 @@
 
 A lightweight, Docker-based DNS service designed for home lab environments. This project uses CoreDNS to provide a fast, flexible, and easy-to-configure DNS server perfect for managing local network services.
 
+```
+┌─────────────────────────────────────────────────────────────┐
+│                       Home Lab Network                       │
+├─────────────────────────────────────────────────────────────┤
+│                                                               │
+│  ┌──────────┐      ┌──────────┐      ┌──────────┐          │
+│  │  Laptop  │      │   NAS    │      │ Proxmox  │          │
+│  └────┬─────┘      └────┬─────┘      └────┬─────┘          │
+│       │                 │                  │                 │
+│       └─────────────────┴──────────────────┘                 │
+│                         │                                    │
+│                    DNS Query                                 │
+│                 (nas.homelab.local)                         │
+│                         │                                    │
+│                         ▼                                    │
+│              ┌─────────────────────┐                        │
+│              │   DNSaaS (CoreDNS)  │                        │
+│              │   192.168.1.10:53   │                        │
+│              ├─────────────────────┤                        │
+│              │  ✓ Local Zone       │                        │
+│              │  ✓ Caching          │                        │
+│              │  ✓ Monitoring       │                        │
+│              │  ✓ Health Checks    │                        │
+│              └──────────┬──────────┘                        │
+│                         │                                    │
+└─────────────────────────┼────────────────────────────────────┘
+                          │
+                   External DNS
+                  (google.com, etc.)
+                          │
+                          ▼
+              ┌──────────────────────┐
+              │  Upstream DNS        │
+              │  8.8.8.8, 1.1.1.1   │
+              └──────────────────────┘
+```
+
 ## Features
 
 - 🚀 **Easy Deployment**: Single command Docker Compose setup
