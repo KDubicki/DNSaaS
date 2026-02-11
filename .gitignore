@@ -1,0 +1,19 @@
+# Generated files
+*.log
+
+# Environment files
+.env.local
+
+# Docker volumes
+data/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

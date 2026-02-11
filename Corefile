@@ -1,0 +1,31 @@
+. {
+    # Forward all queries to upstream DNS servers
+    forward . 8.8.8.8 8.8.4.4 1.1.1.1
+    
+    # Enable caching
+    cache 30
+    
+    # Enable logging
+    log
+    
+    # Enable errors logging
+    errors
+    
+    # Enable health check endpoint
+    health :8080
+    
+    # Enable prometheus metrics
+    prometheus :9153
+}
+
+# Home lab local zone
+homelab.local {
+    # File plugin for zone data
+    file /etc/coredns/zones/homelab.local.zone
+    
+    # Enable logging
+    log
+    
+    # Enable errors logging
+    errors
+}

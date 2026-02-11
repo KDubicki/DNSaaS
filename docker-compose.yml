@@ -1,0 +1,35 @@
+services:
+  coredns:
+    image: coredns/coredns:latest
+    container_name: dnsaas-coredns
+    restart: unless-stopped
+    
+    # DNS ports
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+      # Prometheus metrics
+      - "9153:9153/tcp"
+    
+    # Mount configuration and zone files
+    volumes:
+      - ./Corefile:/etc/coredns/Corefile:ro
+      - ./zones:/etc/coredns/zones:ro
+    
+    # Use Corefile as the configuration
+    command: -conf /etc/coredns/Corefile
+    
+    networks:
+      - dns-network
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  dns-network:
+    driver: bridge
