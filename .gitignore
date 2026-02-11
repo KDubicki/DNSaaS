@@ -17,3 +17,6 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Test files
+docker-compose.test.yml
