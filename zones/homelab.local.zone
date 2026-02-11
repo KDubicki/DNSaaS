@@ -1,0 +1,28 @@
+$ORIGIN homelab.local.
+$TTL 3600
+
+@       IN      SOA     ns1.homelab.local. admin.homelab.local. (
+                        2026021101      ; Serial (YYYYMMDDNN)
+                        3600            ; Refresh
+                        1800            ; Retry
+                        604800          ; Expire
+                        86400 )         ; Minimum TTL
+
+; Name servers
+@       IN      NS      ns1.homelab.local.
+
+; A records for name server
+ns1     IN      A       192.168.1.10
+
+; Example home lab services
+router          IN      A       192.168.1.1
+nas             IN      A       192.168.1.100
+proxmox         IN      A       192.168.1.50
+docker          IN      A       192.168.1.51
+k8s-master      IN      A       192.168.1.60
+k8s-worker1     IN      A       192.168.1.61
+k8s-worker2     IN      A       192.168.1.62
+
+; Example CNAME records
+storage         IN      CNAME   nas.homelab.local.
+vm-host         IN      CNAME   proxmox.homelab.local.
